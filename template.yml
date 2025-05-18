@@ -11,6 +11,7 @@ Resources:
   TestFunctionURL:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: TestFunctionURL
       CodeUri: ./src
       Description: ''
       MemorySize: 128
