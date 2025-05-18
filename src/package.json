@@ -5,9 +5,10 @@
   "scripts": {
     "start": "sam local start-api -t ../template.yml",
     "invoke": "sam local invoke TestFunctionURL --event ../events/event.json -t ../template.yml",
-    "build": "sam build -t ../template.yml",
+    "build": "cd .. && sam build -t template.yml",
     "deploy": "sam deploy --guided -t ../template.yml",
-    "deploy:quick": "sam deploy -t ../template.yml",
+    "deploy:quick": "sam deploy -t ../template.yml --no-confirm-changeset --no-fail-on-empty-changeset",
+    "deploy:direct": "cd .. && zip -r function.zip src/ && aws lambda update-function-code --function-name TestFunctionURL --zip-file fileb://function.zip && rm function.zip",
     "validate": "sam validate -t ../template.yml",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
