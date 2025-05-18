@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "sam local start-api",
-    "invoke": "sam local invoke TestFunctionURL --event ../events/event.json",
-    "build": "sam build",
-    "deploy": "sam deploy --guided",
-    "deploy:quick": "sam deploy",
-    "validate": "sam validate",
+    "start": "sam local start-api -t ../template.yml",
+    "invoke": "sam local invoke TestFunctionURL --event ../events/event.json -t ../template.yml",
+    "build": "sam build -t ../template.yml",
+    "deploy": "sam deploy --guided -t ../template.yml",
+    "deploy:quick": "sam deploy -t ../template.yml",
+    "validate": "sam validate -t ../template.yml",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
