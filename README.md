@@ -1,49 +1,106 @@
-# aws-lambda-dynamodb
+# AWS Lambda Bedrock Handler
 
-This project demonstrates an AWS Lambda (Node.js) backed by DynamoDB and tested locally via AWS SAM.
+A serverless application that processes HTTP requests with AWS Lambda.
+
+## Project Overview
+
+This project contains an AWS Lambda function that processes POST requests and returns enhanced responses with some fun facts and input analysis.
+
+## Project Structure
+
+```
+aws-lambda-dynamodb/
+├── events/             # Test event files
+│   └── event.json      # Sample test event
+├── src/                # Lambda function source code
+│   ├── index.js        # Main Lambda handler
+│   └── package.json    # Project dependencies
+├── template.yml        # SAM template for deployment
+└── README.md           # Project documentation
+```
 
 ## Prerequisites
 
-- Node.js (>=14.x)
-- AWS SAM CLI (https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
-- Docker (for local invocation)
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [AWS CLI](https://aws.amazon.com/cli/) (configured with appropriate credentials)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 
-## Setup
+## Getting Started
 
-1. Clone the repo
-
+1. Clone this repository
+2. Install dependencies:
    ```bash
-   git clone https://your-repo-url.git
-   cd aws-lambda-dynamodb
-   ```
-
-2. Install dependencies
-
-   ```bash
+   cd src
    npm install
    ```
 
-3. Build your application
-   ```bash
-   sam build
-   ```
+## Local Development
 
-## Local Testing
-
-To invoke your function locally with the provided sample event:
+### Invoke the function locally
 
 ```bash
-sam local invoke TestFunctionURL --event events/event.json
+cd src
+npm run invoke
 ```
 
-You should see your Lambda’s output in the console.
+### Start a local API
 
-## Troubleshooting
+```bash
+cd src
+npm run start
+```
 
-- Ensure Docker is running and accessible.
-- If you get a 405 error, verify that `events/event.json` has:
-  ```json
-  "requestContext": {
-    "http": { "method": "POST" }
-  }
-  ```
+## Deployment
+
+### Option 1: Deploy using SAM (creates or updates CloudFormation stack)
+
+This method is useful if you want to manage the entire AWS infrastructure through CloudFormation:
+
+```bash
+cd src
+npm run deploy
+```
+
+For subsequent deployments after configuration:
+
+```bash
+cd src
+npm run deploy:quick
+```
+
+### Option 2: Direct deployment to existing Lambda function
+
+This method updates just the function code of an existing Lambda function:
+
+```bash
+cd src
+npm run deploy:direct
+```
+
+## Available Scripts
+
+- `npm run start` - Start the API locally
+- `npm run invoke` - Invoke the function locally with a test event
+- `npm run build` - Build the SAM application
+- `npm run deploy` - Deploy with guided setup
+- `npm run deploy:quick` - Deploy without prompts
+- `npm run deploy:direct` - Deploy directly to the existing Lambda function
+- `npm run validate` - Validate the SAM template
+- `npm run lint` - Run linting checks
+
+## Testing the Function
+
+After deploying, you can test the function by sending a POST request to your Lambda function URL with a JSON body:
+
+```json
+{
+  "foo": "bar"
+}
+```
+
+The function will return a response with:
+
+- A fun AWS fact
+- Analysis of your input
+- Request metadata
+- Your original data

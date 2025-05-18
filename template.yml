@@ -8,10 +8,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Application Model template describing your function.
 Resources:
-  TestFunctionURL:
+  BedrockHandler:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: TestFunctionURL
+      FunctionName: bedrock-handler
       CodeUri: ./src
       Description: ''
       MemorySize: 128
@@ -41,7 +41,7 @@ Resources:
                 - logs:PutLogEvents
               Resource:
                 - >-
-                  arn:aws:logs:us-east-1:600431846036:log-group:/aws/lambda/TestFunctionURL:*
+                  arn:aws:logs:us-east-1:600431846036:log-group:/aws/lambda/bedrock-handler:*
       RecursiveLoop: Terminate
       SnapStart:
         ApplyOn: None
