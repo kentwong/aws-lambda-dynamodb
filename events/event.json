@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "routeKey": "$default",
+  "rawPath": "/",
+  "rawQueryString": "",
+  "headers": { "content-type": "application/json" },
+  "queryStringParameters": {},
+  "requestContext": {
+    "http": {
+      "method": "POST"
+    }
+  },
+  "body": "{\"foo\":\"bar\"}",
+  "isBase64Encoded": false
+}
