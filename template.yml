@@ -14,8 +14,8 @@ Resources:
       FunctionName: bedrock-handler
       CodeUri: ./src
       Description: ''
-      MemorySize: 128
-      Timeout: 3
+      MemorySize: 256
+      Timeout: 15
       Handler: index.handler
       Runtime: nodejs22.x
       Architectures:
@@ -42,6 +42,11 @@ Resources:
               Resource:
                 - >-
                   arn:aws:logs:us-east-1:600431846036:log-group:/aws/lambda/bedrock-handler:*
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+                - bedrock:ListFoundationModels
+              Resource: '*'
       RecursiveLoop: Terminate
       SnapStart:
         ApplyOn: None

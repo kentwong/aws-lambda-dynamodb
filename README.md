@@ -104,3 +104,5 @@ The function will return a response with:
 - Analysis of your input
 - Request metadata
 - Your original data
+
+\*\* Use this command to check what is the available bedrock model: aws bedrock list-foundation-models --query "modelSummaries[?contains(modelId, 'claude-3-5-sonnet') && contains(modelId, 'v2')]"
