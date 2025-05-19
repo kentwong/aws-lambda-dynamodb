@@ -41,3 +41,4 @@ yarn-error.log*
 # Temporary directories
 tmp/
 temp/
+.aws-sam/
