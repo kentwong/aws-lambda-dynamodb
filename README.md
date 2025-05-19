@@ -34,6 +34,32 @@ aws-lambda-dynamodb/
    npm install
    ```
 
+## Manually Adding Bedrock Permissions
+
+If you need to manually add Bedrock permissions to an existing Lambda role, you can use the following AWS CLI command:
+
+```bash
+# Update the IAM role with Bedrock permissions
+aws iam put-role-policy \
+    --role-name bedrock-handler-role-du8j2b2h \
+    --policy-name bedrock-access \
+    --policy-document '{
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": "bedrock:InvokeModel",
+                "Resource": "arn:aws:bedrock:ap-southeast-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "bedrock:ListFoundationModels",
+                "Resource": "*"
+            }
+        ]
+    }'
+```
+
 ## Local Development
 
 ### Invoke the function locally
@@ -105,4 +131,11 @@ The function will return a response with:
 - Request metadata
 - Your original data
 
-\*\* Use this command to check what is the available bedrock model: aws bedrock list-foundation-models --query "modelSummaries[?contains(modelId, 'claude-3-5-sonnet') && contains(modelId, 'v2')]"
+**Tip:** To find available Bedrock models (such as Claude 3.5 Sonnet v2), use the following AWS CLI command:
+
+```bash
+aws bedrock list-foundation-models \
+  --query "modelSummaries[?contains(modelId, 'claude-3-5-sonnet') && contains(modelId, 'v2')]"
+```
+
+This command filters the list of foundation models to show only those matching the specified criteria.

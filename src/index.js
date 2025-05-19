@@ -1,7 +1,7 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
 
-// Initialize the Bedrock client
-const bedrockClient = new BedrockRuntimeClient({ region: process.env.AWS_REGION });
+// Initialize the Bedrock client with the specific region where Claude is available
+const bedrockClient = new BedrockRuntimeClient({ region: 'ap-southeast-2' });
 
 // Claude 3.5 Sonnet model ID
 const MODEL_ID = 'anthropic.claude-3-5-sonnet-20241022-v2:0';
